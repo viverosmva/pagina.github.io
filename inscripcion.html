@@ -1,0 +1,62 @@
+<div class="container" id="inscripcion-page" style="display: none;">
+    <header class="header">
+        <nav class="nav-links">
+            <a href="index.html">🏠 Inicio</a>
+            <a href="cursos.html">📚 Cursos</a>
+            <a href="perfil_usuario.html">👤 Perfil</a>
+        </nav>
+    </header>
+
+    <div class="form-container">
+        <h2>📝 Formulario de Inscripción</h2>
+        
+        <div class="curso-info">
+            <div class="curso-titulo" id="curso-titulo"></div>
+            <div id="curso-duracion"></div>
+        </div>
+
+        <form id="inscripcion-form" onsubmit="return handleSubmit(event)">
+            <div class="form-group">
+                <label for="nombre">Nombre Completo*</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Correo Electrónico*</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono">
+            </div>
+
+            <div class="form-group">
+                <label for="nivel-educacion">Nivel de Educación*</label>
+                <select id="nivel-educacion" name="nivel-educacion" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="bachillerato">Bachillerato</option>
+                    <option value="tecnico">Técnico</option>
+                    <option value="pregrado">Pregrado</option>
+                    <option value="postgrado">Postgrado</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="experiencia">Experiencia Previa en el Tema</label>
+                <textarea id="experiencia" name="experiencia" rows="4"></textarea>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="button primary-button">
+                    ✅ Confirmar Inscripción
+                </button>
+                <a href="cursos.html" class="button secondary-button">
+                    ❌ Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>

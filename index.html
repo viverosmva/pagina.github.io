@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acción Agua - Inicio</title>
+    <style>
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(to bottom, #e6f3ff, #ffffff);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header animado */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.8s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .header h1 {
+            color: #2196F3;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #2196F3;
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #2196F3;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Sección de bienvenida */
+        .welcome-section {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            animation: fadeIn 1s ease 0.5s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-section h2 {
+            color: #1565C0;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .welcome-banner {
+            background: #2196F3;
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(0);
+            transition: transform 0.3s;
+        }
+
+        .welcome-banner:hover {
+            transform: translateY(-10px);
+        }
+
+        .welcome-banner p:first-child {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* Sección de video */
+        .video-section {
+            padding: 4rem 2rem;
+            text-align: center;
+            animation: fadeIn 1s ease 1s both;
+        }
+
+        .video-section h2 {
+            color: #1565C0;
+            margin-bottom: 2rem;
+        }
+
+        .promo-video {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .promo-video:hover {
+            transform: scale(1.02);
+        }
+
+        /* Galería */
+        .gallery-section {
+            padding: 4rem 2rem;
+            animation: fadeIn 1s ease 1.5s both;
+        }
+
+        .gallery-section h2 {
+            color: #1565C0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .welcome-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        /* Elementos decorativos de agua */
+        .water-drop {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: rgba(33, 150, 243, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: dropFall 3s linear infinite;
+        }
+
+        @keyframes dropFall {
+            0% {
+                transform: translateY(-100vh) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) scale(1);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Acción Agua</h1>
+            <nav class="nav-links">
+                <a href="index.html">🏠 Inicio</a>
+                <a href="registro.html">📝 Registrarse</a>
+                <a href="login.html">🔑 Iniciar Sesión</a>
+                <a href="cursos.html">📚 Cursos</a>
+                <a href="perfil_usuario.html">👤 Perfil</a>
+            </nav>
+        </header>
+        
+        <section class="welcome-section">
+            <h2>Unidos por el Agua: Protejamos Nuestro Futuro</h2>
+            <div class="welcome-banner">
+                <p>¡BIENVENIDOS!</p>
+                <p>Conservemos juntos el recurso más valioso de la Tierra.</p>
+            </div>
+        </section>
+
+        <section class="video-section">
+            <h2>Conoce Nuestra Misión</h2>
+            <video controls class="promo-video">
+                <source src="ruta_del_video.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de video.
+            </video>
+            <p>Aprende más sobre cómo cada acción puede marcar la diferencia en la conservación del agua.</p>
+        </section>
+
+        <section class="gallery-section">
+            <h2>Galería</h2>
+            <div class="gallery">
+                <img src="imagen1.jpg" alt="Imagen de conservación del agua">
+                <img src="imagen2.jpg" alt="Imagen de río limpio">
+                <img src="imagen3.jpg" alt="Imagen de comunidad cuidando el agua">
+                <img src="imagen4.jpg" alt="Imagen de paisaje con agua pura">
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Crear gotas de agua decorativas
+        function createWaterDrop() {
+            const drop = document.createElement('div');
+            drop.className = 'water-drop';
+            drop.style.left = Math.random() * window.innerWidth + 'px';
+            document.body.appendChild(drop);
+            
+            // Eliminar la gota después de la animación
+            setTimeout(() => {
+                drop.remove();
+            }, 3000);
+        }
+
+        // Crear gotas periódicamente
+        setInterval(createWaterDrop, 2000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos Disponibles</title>
+    <style>
+        /* Animaciones base */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Estilos base mejorados */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header animado */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: #0066cc;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Barra de búsqueda mejorada */
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+            gap: 1rem;
+        }
+
+        .search-bar input {
+            width: 60%;
+            padding: 1rem;
+            border: 2px solid transparent;
+            border-radius: 25px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            border-color: #0066cc;
+            box-shadow: 0 4px 20px rgba(0, 102, 204, 0.2);
+            transform: scale(1.02);
+        }
+
+        /* Menú de cursos animado */
+        .course-menu {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 2rem auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .menu-button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .primary-menu-button {
+            background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+            color: white;
+        }
+
+        .primary-menu-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+        }
+
+        /* Tarjetas de curso mejoradas */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .course-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.8s ease-out;
+            animation-delay: calc(var(--card-index) * 0.2s);
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .course-image-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .course-card:hover .course-image {
+            transform: scale(1.1);
+        }
+
+        .course-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            animation: pulse 2s infinite;
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .course-title {
+            color: #333;
+            margin: 0 0 1rem 0;
+            font-size: 1.4rem;
+        }
+
+        .course-duration {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .button-group {
+            margin-top: 1.5rem;
+        }
+
+        .primary-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .primary-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+        }
+
+        /* Animación para filtrado */
+        .course-card.hidden {
+            display: none;
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .filter-select {
+            padding: 0.8rem;
+            border: 2px solid transparent;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select:hover {
+            border-color: #0066cc;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- El resto del HTML permanece igual -->
+    <div class="container">
+        <header class="header">
+            <nav class="nav-links">
+                <a href="index.html">🏠 Inicio</a>
+                <a href="registro.html">📝 Registrarse</a>
+                <a href="login.html">🔑 Iniciar Sesión</a>
+                <a href="cursos.html">📚 Cursos</a>
+                <a href="perfil_usuario.html">👤 Perfil</a>
+            </nav>
+        </header>
+
+        <section class="courses-section">
+            <h2>✨ Cursos Disponibles</h2>
+
+            <div class="course-menu">
+                <div class="menu-buttons">
+                    <button class="menu-button primary-menu-button" onclick="window.location.href='agregar_curso.html'">
+                        ➕ Agregar Curso
+                    </button>
+                    <button class="menu-button secondary-menu-button" onclick="mostrarCursosDisponibles()">
+                        📚 Cursos Disponibles
+                    </button>
+                </div>
+
+                <div class="search-bar">
+                    <input 
+                        type="text" 
+                        id="search-input" 
+                        placeholder="Buscar cursos por título, descripción, etc." 
+                    />
+                    <button class="menu-button primary-menu-button" onclick="filtrarCursos()">
+                        🔍 Buscar
+                    </button>
+                </div>
+
+                <div class="filter-options">
+                    <select class="filter-select" id="duration-filter">
+                        <option value="">Duración</option>
+                        <option value="corta">4-6 semanas</option>
+                        <option value="media">8-12 semanas</option>
+                        <option value="larga">+12 semanas</option>
+                    </select>
+                    <select class="filter-select" id="status-filter">
+                        <option value="">Estado</option>
+                        <option value="nuevo">Nuevo</option>
+                        <option value="popular">Popular</option>
+                        <option value="todos">Todos</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="course-grid" id="course-grid">
+                <!-- Los mismos course-card que tenías antes -->
+                <div class="course-card" style="--card-index: 1" data-title="Gestión y Conservación del Recurso Hídrico" data-description="Conservación y gestión sostenible de los recursos hídricos." data-duration="corta" data-status="popular">
+                    <span class="course-badge">¡Popular!</span>
+                    <div class="course-image-container">
+                        <img src="https://images.pexels.com/photos/1761279/pexels-photo-1761279.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                             alt="Gestión y Conservación del Recurso Hídrico" 
+                             class="course-image">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Gestión y Conservación del Recurso Hídrico</h3>
+                        <p class="course-duration">4 a 6 semanas (1-2 horas cada semana)</p>
+                        <p class="course-description">
+                            Objetivo del curso: Brindar conocimientos y herramientas sobre la importancia del agua, los 
+                            desafíos actuales, y las estrategias y acciones necesarias para la conservación y gestión 
+                            sostenible de los recursos hídricos.
+                        </p>
+                        <div class="button-group">
+                            <a href="registro_curso.html" class="button primary-button">
+                                📝 Inscribirse al curso
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card" style="--card-index: 2" data-title="Tecnologías para el Tratamiento de Agua" data-description="Métodos para el tratamiento y purificación del agua." data-duration="media" data-status="nuevo">
+                    <span class="course-badge">¡Nuevo!</span>
+                    <div class="course-image-container">
+                        <img src="https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                             alt="Tecnologías para el Tratamiento de Agua" 
+                             class="course-image">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Tecnologías para el Tratamiento de Agua</h3>
+                        <p class="course-duration">8 semanas (2 horas cada semana)</p>
+                        <p class="course-description">
+                            Aprende sobre las últimas tecnologías y métodos para el tratamiento y purificación del agua. 
+                            Desde sistemas básicos hasta soluciones avanzadas para diferentes contextos y necesidades.
+                        </p>
+                        <div class="button-group">
+                            <a href="registro_curso.html" class="button primary-button">
+                                📝 Inscribirse al curso
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div id="confirmation-message"></div>
+    </div>
+
+    <script>
+        // Mejorar la función de filtrado con animaciones
+        function filtrarCursos() {
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+            const durationFilter = document.getElementById('duration-filter').value;
+            const statusFilter = document.getElementById('status-filter').value;
+            const courses = document.querySelectorAll('.course-card');
+
+            courses.forEach((course, index) => {
+                const title = course.getAttribute('data-title').toLowerCase();
+                const description = course.getAttribute('data-description').toLowerCase();
+                const duration = course.getAttribute('data-duration');
+                const status = course.getAttribute('data-status');
+
+                const matchesSearch = title.includes(searchInput) || description.includes(searchInput);
+                const matchesDuration = !durationFilter || duration === durationFilter;
+                const matchesStatus = !statusFilter || statusFilter === 'todos' || status === statusFilter;
+
+                course.style.setProperty('--card-index', index);
+
+                if (matchesSearch && matchesDuration && matchesStatus) {
+                    course.classList.remove('hidden');
+                    // Reiniciar la animación
+                    course.style.animation = 'none';
+                    course.offsetHeight; // Trigger reflow
+                    course.style.animation = 'fadeIn 0.8s ease-out forwards';
+                } else {
+                    course.classList.add('hidden');
+                }
+            });
+        }
+
+        function mostrarCursosDisponibles() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('

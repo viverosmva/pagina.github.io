@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: #0066cc;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .profile-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #666;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-picture-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.5rem;
+            color: white;
+            font-size: 0.8rem;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-picture:hover .profile-picture-overlay {
+            transform: translateY(0);
+        }
+
+        .profile-info h1 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-status {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .profile-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .profile-tab {
+            padding: 1rem;
+            cursor: pointer;
+            color: #666;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.3s ease;
+        }
+
+        .profile-tab.active {
+            color: #0066cc;
+            border-bottom-color: #0066cc;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #0066cc;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .primary-button {
+            background: linear-gradient(45deg, #0066cc, #0099ff);
+            color: white;
+        }
+
+        .primary-button:hover {
+            background: linear-gradient(45deg, #0099ff, #0066cc);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 102, 204, 0.4);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .course-card {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(45deg, #0066cc, #0099ff);
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="nav-links">
+                <a href="index.html">🏠 Inicio</a>
+                <a href="registro.html">📝 Registrarse</a>
+                <a href="login.html">🔑 Iniciar Sesión</a>
+                <a href="cursos.html">📚 Cursos</a>
+                <a href="perfil_usuario.html">👤 Perfil</a>
+            </nav>
+        </header>
+
+        <section class="profile-section">
+            <div class="profile-header">
+                <div class="profile-picture">
+                    <img src="/api/placeholder/150/150" alt="Foto de perfil">
+                    <div class="profile-picture-overlay">Cambiar foto</div>
+                </div>
+                <div class="profile-info">
+                    <h1>Juan Pérez</h1>
+                    <p class="profile-status">Estudiante Activo</p>
+                </div>
+            </div>
+
+            <div class="profile-tabs">
+                <div class="profile-tab active" onclick="changeTab('personal')">Información Personal</div>
+                <div class="profile-tab" onclick="changeTab('cursos')">Mis Cursos</div>
+                <div class="profile-tab" onclick="changeTab('preferencias')">Preferencias</div>
+            </div>
+
+            <div id="personal" class="tab-content active">
+                <form id="profile-form">
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo</label>
+                        <input type="text" id="nombre" class="form-control" value="Juan Pérez">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" class="form-control" value="juan.perez@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" class="form-control" value="+34 123 456 789">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bio">Biografía</label>
+                        <textarea id="bio" class="form-control" rows="4">Estudiante apasionado por el medio ambiente y la conservación del agua.</textarea>
+                    </div>
+
+                    <button type="submit" class="button primary-button">Guardar Cambios</button>
+                </form>
+            </div>
+
+            <div id="cursos" class="tab-content">
+                <div class="courses-grid">
+                    <div class="course-card">
+                        <h3>Gestión y Conservación del Recurso Hídrico</h3>
+                        <p>Progreso: 75%</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%"></div>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <h3>Tecnologías para el Tratamiento de Agua</h3>
+                        <p>Progreso: 30%</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 30%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="preferencias" class="tab-content">
+                <form id="preferences-form">
+                    <div class="form-group">
+                        <label for="notifications">Notificaciones por Email</label>
+                        <select id="notifications" class="form-control">
+                            <option>Todas las notificaciones</option>
+                            <option>Solo importantes</option>
+                            <option>Ninguna</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="language">Idioma Preferido</label>
+                        <select id="language" class="form-control">
+                            <option>Español</option>
+                            <option>English</option>
+                            <option>Português</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="button primary-button">Guardar Preferencias</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function changeTab(tabName) {
+            // Desactivar todas las pestañas y contenidos
+            document.querySelectorAll('.profile-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Activar la pestaña y contenido seleccionados
+            document.querySelector(`.profile-tab:nth-child(${tabName === 'personal' ? 1 : tabName === 'cursos' ? 2 : 3})`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // Manejar envío de formularios
+        document.getElementById('profile-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Cambios guardados con éxito!');
+        });
+
+        document.getElementById('preferences-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Preferencias actualizadas con éxito!');
+        });
+    </script>
+</body>
+</html>

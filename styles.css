@@ -1,0 +1,150 @@
+/* Reset y estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #ffffff;
+    width: 80%;
+    max-width: 800px;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid #00796b;
+}
+
+/* Header */
+.header {
+    background-color: #00796b;
+    color: #ffffff;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.header h1 {
+    font-size: 1.5rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* Login y Registro */
+.login-section, .register-section {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+form input, form button {
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 0.75rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+button {
+    background-color: #00796b;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #004d40;
+}
+
+.social-login {
+    margin: 1rem 0;
+}
+
+.social-button {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+}
+
+.facebook {
+    background-color: #3b5998;
+}
+
+.google {
+    background-color: #db4437;
+}
+
+.forgot-password {
+    color: #00796b;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Sección de Cursos */
+.courses-section {
+    margin-top: 2rem;
+}
+
+.course-card {
+    background-color: #f0f4c3;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.course-card h3 {
+    color: #00796b;
+}
+
+.course-image {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.enroll-button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #00796b;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.enroll-button:hover {
+    background-color: #004d40;
+}
